@@ -14,4 +14,24 @@ public class CustomerServiceImpl implements CustomerService {
                 .lastName("smith")
                 .build();
     }
+
+    @Override
+    public CustomerDto postCustomer(CustomerDto customerDto) {
+        System.out.println(customerDto.getFirstName());
+        return CustomerDto.builder()
+                .id(UUID.randomUUID())
+                .firstName(customerDto.getFirstName())
+                .lastName(customerDto.getLastName())
+                .build();
+    }
+
+    @Override
+    public void putCustomer(UUID id, CustomerDto body) {
+        System.out.println("put");
+    }
+
+    @Override
+    public void deleteCustomer(UUID id) {
+        System.out.println("deleted");
+    }
 }

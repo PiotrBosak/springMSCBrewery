@@ -1,10 +1,11 @@
 package pb.spring.springMSCBrewery.web.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pb.spring.springMSCBrewery.web.model.BeerDto;
 
 import java.util.UUID;
-
+@Slf4j
 @Service
 public class BeerServiceImpl implements BeerService {
     @Override
@@ -18,6 +19,7 @@ public class BeerServiceImpl implements BeerService {
 
     @Override
     public BeerDto postBeer(BeerDto request) {
+        System.out.println(request.getBeerName());
         try {
             return BeerDto.builder()
                     .id(UUID.randomUUID())
@@ -32,6 +34,16 @@ public class BeerServiceImpl implements BeerService {
         }
     }
 
+    @Override
+    public void updateBeer(UUID id, BeerDto beerDto) {
+        //todo add real impl
+
+    }
+
+    @Override
+    public void deleteById(UUID id) {
+        log.debug("deleted a beer");
+    }
 }
 
 
