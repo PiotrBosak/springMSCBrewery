@@ -1,12 +1,14 @@
 package pb.spring.springMSCBrewery.web.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import pb.spring.springMSCBrewery.web.model.BeerDto;
 
 import java.util.UUID;
 @Slf4j
 @Service
+@Primary
 public class BeerServiceImpl implements BeerService {
     @Override
     public BeerDto getBeer(UUID id) {
