@@ -8,4 +8,5 @@ import java.util.UUID;
 public interface BeerService {
 
     BeerDto getBeer(UUID id);
+    BeerDto postBeer(BeerDto request);
 }
