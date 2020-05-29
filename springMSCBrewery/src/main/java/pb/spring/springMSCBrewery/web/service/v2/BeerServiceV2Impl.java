@@ -1,29 +1,33 @@
-package pb.spring.springMSCBrewery.web.service;
+package pb.spring.springMSCBrewery.web.service.v2;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import pb.spring.springMSCBrewery.web.model.BeerDto;
+import pb.spring.springMSCBrewery.web.model.v2.BeerDtoV2;
+import pb.spring.springMSCBrewery.web.model.v2.BeerStyle;
+import pb.spring.springMSCBrewery.web.service.BeerService;
 
 import java.util.UUID;
+
 @Slf4j
 @Service
 @Primary
-public class BeerServiceImpl implements BeerService {
+public class BeerServiceV2Impl implements BeerServiceV2 {
     @Override
-    public BeerDto getBeer(UUID id) {
-        return BeerDto.builder()
+    public BeerDtoV2 getBeer(UUID id) {
+        return BeerDtoV2.builder()
                 .id(id)
                 .beerName("whatever")
-                .beerStyle("some style")
+                .beerStyle(BeerStyle.ALE)
                 .build();
     }
 
     @Override
-    public BeerDto postBeer(BeerDto request) {
+    public BeerDtoV2 postBeer(BeerDtoV2 request) {
         System.out.println(request.getBeerName());
         try {//try is not useful here
-            return BeerDto.builder()
+            return BeerDtoV2.builder()
                     .id(UUID.randomUUID())
                     .beerName(request.getBeerName())
                     .beerStyle(request.getBeerStyle())
@@ -37,7 +41,7 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public void updateBeer(UUID id, BeerDto beerDto) {
+    public void updateBeer(UUID id, BeerDtoV2 beerDto) {
         //todo add real impl
 
     }
@@ -47,5 +51,4 @@ public class BeerServiceImpl implements BeerService {
         log.debug("deleted a beer");
     }
 }
-
 
