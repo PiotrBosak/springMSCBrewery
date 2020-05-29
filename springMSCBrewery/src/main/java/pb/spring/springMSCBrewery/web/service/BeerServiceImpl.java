@@ -22,7 +22,7 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public BeerDto postBeer(BeerDto request) {
         System.out.println(request.getBeerName());
-        try {//try is not useful here
+        try {
             return BeerDto.builder()
                     .id(UUID.randomUUID())
                     .beerName(request.getBeerName())
