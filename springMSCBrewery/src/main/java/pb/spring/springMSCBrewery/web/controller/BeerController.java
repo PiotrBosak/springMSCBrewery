@@ -1,5 +1,8 @@
 package pb.spring.springMSCBrewery.web.controller;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,21 +11,15 @@ import org.springframework.web.bind.annotation.*;
 import pb.spring.springMSCBrewery.web.model.BeerDto;
 import pb.spring.springMSCBrewery.web.service.BeerService;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
+@Slf4j
 @Validated
 @RequestMapping("/api/v1/beer")
 @RestController
+@RequiredArgsConstructor
 public class BeerController {
     private final BeerService service;
-
-    public BeerController(BeerService service) {
-        this.service = service;
-    }
 
     @GetMapping("")
     private String getSth() {
@@ -36,7 +33,8 @@ public class BeerController {
 
     @PostMapping
     public ResponseEntity<BeerDto> handlePost(@Valid @RequestBody BeerDto dto) {
-        var savedBeer = service.postBeer(dto);
+        log.debug("in handle post...");
+        val savedBeer = service.postBeer(dto);
         if (savedBeer.getBeerStyle() != null) {
             var headers = new HttpHeaders();
             headers.add("Location", "/api/v1/beer/" + savedBeer.getId().toString());

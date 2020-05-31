@@ -3,6 +3,7 @@ package pb.spring.springMSCBrewery.web.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -23,7 +24,7 @@ public class MvcExceptionHandler {
     }
 
     @ExceptionHandler(BindException.class)
-    public ResponseEntity<List> handleBindException(BindException e) {
+    public ResponseEntity<List<ObjectError>> handleBindException(BindException e) {
         return new ResponseEntity<>(e.getAllErrors(), HttpStatus.BAD_REQUEST);
     }
 }
