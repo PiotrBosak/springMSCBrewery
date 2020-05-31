@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pb.spring.springMSCBrewery.web.model.BeerDto;
 import pb.spring.springMSCBrewery.web.service.BeerService;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/beer")
@@ -29,7 +30,7 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity<BeerDto> handlePost(@RequestBody BeerDto dto) {
+    public ResponseEntity<BeerDto> handlePost(@Valid @RequestBody BeerDto dto) {
         var savedBeer = service.postBeer(dto);
         if (savedBeer.getBeerStyle() != null) {
             var headers = new HttpHeaders();
@@ -39,7 +40,7 @@ public class BeerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity handleUpdate(@PathVariable("id") UUID id, @RequestBody BeerDto beerDto) {
+    public ResponseEntity handleUpdate(@PathVariable("id") UUID id,@Valid @RequestBody BeerDto beerDto) {
         service.updateBeer(id, beerDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }

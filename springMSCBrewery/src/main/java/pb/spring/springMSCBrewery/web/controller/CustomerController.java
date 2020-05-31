@@ -25,7 +25,7 @@ public class CustomerController {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody CustomerDto customer){
+    public ResponseEntity<HttpHeaders> handlePost(@RequestBody CustomerDto customer){
         var newCustomer = customerService.postCustomer(customer);
         var headers = new HttpHeaders();
         headers.add("Location","api/customer" + newCustomer.getId().toString());
