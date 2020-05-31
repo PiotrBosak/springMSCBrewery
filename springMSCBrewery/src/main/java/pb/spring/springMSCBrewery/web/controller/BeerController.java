@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import pb.spring.springMSCBrewery.web.model.BeerDto;
 import pb.spring.springMSCBrewery.web.service.BeerService;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/beer")
@@ -40,7 +43,7 @@ public class BeerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity handleUpdate(@PathVariable("id") UUID id,@Valid @RequestBody BeerDto beerDto) {
+    public ResponseEntity handleUpdate(@PathVariable("id") UUID id, @Valid @RequestBody BeerDto beerDto) {
         service.updateBeer(id, beerDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -49,6 +52,15 @@ public class BeerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void handleDelete(@PathVariable("id") UUID id) {
         service.deleteById(id);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<List<String>> validationErrorHandler(ConstraintViolationException e) {
+        List<String> errors = new ArrayList<>(e.getConstraintViolations().size());
+        e.getConstraintViolations().forEach(c -> {
+            errors.add(c.getPropertyPath() + " : " + c.getMessage());
+        });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
 
