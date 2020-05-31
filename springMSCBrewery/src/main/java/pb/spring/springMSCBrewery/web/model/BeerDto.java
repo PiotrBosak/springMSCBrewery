@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 @Data
 @NoArgsConstructor
@@ -25,6 +26,10 @@ public class BeerDto {
     @Positive
     private Long upc;
 
+    @Null
+    private OffsetDateTime createdDate;
+    @Null
+    private OffsetDateTime lastUpdatedDate;
 
 
 }
