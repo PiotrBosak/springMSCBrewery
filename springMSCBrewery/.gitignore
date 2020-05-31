@@ -150,7 +150,7 @@ Desktop.ini
 *.*~
 *~
 .merge_file*
-
+/.idea
 ######################
 # Gradle Wrapper
 ######################
